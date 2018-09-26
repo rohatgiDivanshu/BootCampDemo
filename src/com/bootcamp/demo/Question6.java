@@ -18,7 +18,7 @@ public class Question6 {
         int[] arr_num = new int[]{3, 5, 2, 4, 2, 3, 4};
         int sizeOfArr = arr_num.length;
 
-        System.out.println("Number occuring twice is :" + numberOccuringOnce(arr_num, sizeOfArr));
+        System.out.println("Number occuring once is :" + numberOccuringOnce(arr_num, sizeOfArr));
 
     }
 
