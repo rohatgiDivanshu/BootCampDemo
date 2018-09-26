@@ -1,5 +1,10 @@
 package com.exercise.second;
 
+class Missing {
+
+}
+
+
 public class Question3Part1 {
 
     public static void main(String[] args) {
@@ -8,6 +13,9 @@ public class Question3Part1 {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        Missing m = new Missing();
+
     }
 
 }

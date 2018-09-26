@@ -4,7 +4,7 @@ public class Question2 {
 
     public static void main(String[] args) {
 
-        String input = "Bootcamp session started in sparta sparta";
+        String input = "Bootcamp session started started in sparta sparta";
         String[] words = input.split(" ");
         int wrc = 1;
 
