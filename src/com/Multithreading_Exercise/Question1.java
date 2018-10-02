@@ -1,31 +1,59 @@
 package com.Multithreading_Exercise;
 
-class Runnable1 implements Runnable {
-    public void run() {
-        for (int i = 1; i <= 20; i += 2) {
-            System.out.println(i);
-        }
-    }
-}
-/*
-
-class Runnable2 implements Runnable {
-    public void run() {
-        for (int i = 0; i < 20; i += 2) {
-            System.out.println(i);
-        }
-    }
-    }
-*/
 
 public class Question1 {
-    public static void main(String[] args) {
-        Runnable r1 = new Runnable1();
+    static int count = 0;
 
-        Thread t1 = new Thread(r1);
-        //Thread t2 = new Thread(r2);
+    public static void main(String[] args) throws InterruptedException {
+
+        final Object lock = new Object();
+        Thread t1 = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+
+                    synchronized (lock) {
+                        count++;
+                        System.out.println("Count incremented to " + count
+                                + " by " + Thread.currentThread().getName());
+                        try {
+                            lock.wait();
+                            lock.notify();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    synchronized (lock) {
+                        lock.notify();
+                        count++;
+                        System.out.println("Count incremented to " + count
+                                + " by " + Thread.currentThread().getName());
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
         t1.start();
-//        t2.start();
+        t2.start();
+        t1.join();
+        t2.join();
+
+
     }
 
 }
